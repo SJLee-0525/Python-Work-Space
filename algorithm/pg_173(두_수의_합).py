@@ -3,7 +3,7 @@ def twoSum(nums, target): # 타겟에서 n 값을 뺀 값이 존재하는지 확
         complement = target - n
 
         if complement in nums:
-            return [i, nums.index(complement)]
+            return [i, nums.index(complement)] # 값이 있는 인덱스를 반환하는 함수임
         
 def twoSum_d(nums, target): # 이게 속도가 더 빠름
     nums_dict = {}

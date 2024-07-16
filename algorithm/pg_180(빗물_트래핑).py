@@ -1,6 +1,6 @@
-ground = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+# 투포인터
 
-def trap(ground): # 투포인터
+def trap(ground): 
     if not ground:
         return 0
     
@@ -21,4 +21,5 @@ def trap(ground): # 투포인터
 
     return volume
 
+ground = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
 print(trap(ground))
