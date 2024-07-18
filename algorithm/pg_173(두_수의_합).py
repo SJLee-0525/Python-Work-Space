@@ -22,4 +22,4 @@ nums = [2, 7, 11, 15]
 target = 18
 
 print(twoSum(nums, target))
-print(twoSum(nums, target))
+print(twoSum_d(nums, target))
