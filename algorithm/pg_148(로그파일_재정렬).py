@@ -1,10 +1,19 @@
+'''
+로그를 재정렬하라. 기준은 아래와 같다
+    1. 로그의 가장 앞 부분은 식별자다
+    2. 문자로 구성된 로그가 숫자 로그보다 앞에 온다.
+    3. 식별자는 순서에 영향을 끼치지 않지만, 문자가 동일할 경우 식별자 순으로 한다.
+    4. 숫자 로그는 입력 순서대로 한다.
+'''
+
 def reorderLogFiles(logs):
     letters, digits = [], []
     for log in logs:
-        if log.split()[1].isdigit(): #isdigit()함수는 리스트에 사용 불가능 하기에 슬라이싱을 단독으로 하였음
+        #isdigit()함수는 리스트에 사용 불가능 하기에 슬라이싱을 단독으로 하였음
+        if log.split()[1].isdigit(): # 만약 log의 두번째 문자열이 숫자면?
             print(log.split()[1])
             digits.append(log)
-        else: #isalpah()
+        else: # == isalpah()
             print(log.split()[1])
             letters.append(log)
 

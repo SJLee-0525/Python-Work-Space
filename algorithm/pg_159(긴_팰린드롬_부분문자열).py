@@ -1,4 +1,7 @@
-def logestPalindrome(s):
+'''
+가장 긴 팰린드롬 부분 문자열을 출력하라
+'''
+def longestPalindrome(s):
     # 팰린드롬 판별 및 투포인터 확장
     def expand(left, right):
         while left >= 0 and right < len(s) and s[left] == s[right]: 
@@ -20,9 +23,28 @@ def logestPalindrome(s):
                      key=len) # 이 중에서 길이가 큰 것을 반환하겠다.
     
     return result
-        
+
+def longestPalindrome_2(input_string):
+    def expand_2(left, right):
+        while left >= 0 and right < len(input_string) and input_string[left] == input_string[right]:
+            left -= 1
+            right += 1
+
+        return input_string[left + 1:right]
+
+    if len(input_string) < 2 or input_string == input_string[::-1]:
+        return input_string
+    
+    temp_result = ''
+
+    for i in range(len(input_string) - 1):
+        result = max(temp_result, expand_2(i, i + 1), expand_2(i, i + 2), key=len)
+
+    return result
+
+
 a = 'babas'
-print(logestPalindrome(a))
+print(longestPalindrome_2(a))
 
 b = 'hellollesas'
-print(logestPalindrome(b))
+print(longestPalindrome_2(b))
