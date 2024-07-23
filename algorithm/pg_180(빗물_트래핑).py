@@ -21,5 +21,25 @@ def trap(ground):
 
     return volume
 
+def trap_2(ground_list):
+    left_index, right_index = 0, len(ground_list) - 1
+    left_max, right_max = 0, 0
+    rain_sum = 0
+    
+    while left_index <= right_index:
+        left, right = ground_list[left_index], ground_list[right_index]
+        left_max, right_max = max(left, left_max), max(right, right_max)
+
+        if left_max <= right_max:
+            rain_sum += left_max - left
+            left_index += 1
+
+        else:
+            rain_sum += right_max - right
+            right_index -= 1
+
+    return rain_sum
+
+
 ground = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
 print(trap(ground))

@@ -37,11 +37,26 @@ def longestPalindrome_2(input_string):
     
     temp_result = ''
 
+    result_list = []
     for i in range(len(input_string) - 1):
-        result = max(temp_result, expand_2(i, i + 1), expand_2(i, i + 2), key=len)
+        result_list.append(max(temp_result, expand_2(i, i + 1), expand_2(i, i + 2), key=len))
+
+    result = max(result_list, key=len)
 
     return result
 
+def twoSum_2(nums, target):
+    index_dict = {}
+    for index, num in enumerate(nums):
+        index_dict[num] = index
+    
+    print(index_dict)
+    result = []
+    for num in nums:
+        if target - num in index_dict:
+            result.append(index_dict[target - num])
+
+    return sorted(result)
 
 a = 'babas'
 print(longestPalindrome_2(a))
