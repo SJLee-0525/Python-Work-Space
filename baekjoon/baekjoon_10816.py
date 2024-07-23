@@ -1,30 +1,22 @@
-from sys import *
+import sys
 
-def binary_search(target, find_list):
-    start = 0
-    end = len(find_list) - 1
+n = int(sys.stdin.readline())
+my_card_list = list(map(int, sys.stdin.readline().split()))
 
-    while start <= end:
-        mid = (start + end) // 2
-        if find_list[mid] == target:
-            return 1
-        elif find_list[mid] < target:
-            start = end + 1
-        else:
-            end = mid - 1
-    return 0
+m = int(sys.stdin.readline())
+target_card_list = list(map(int, sys.stdin.readline().split()))
 
-n = int(stdin.readline())
-n_list = list(map(int, stdin.readline().split()))
-m = int(stdin.readline())
-m_list = list(map(int, stdin.readline().split()))
-n_list.sort()
+card_dict = {}
+for index, card_num in enumerate(my_card_list):
+    if card_num not in card_dict:
+        card_dict[card_num] = [index]
+    else:
+        card_dict[card_num].append(index)
 
-c = 0
-for i in range(m):
-    c += binary_search(i, n_list)
-    print(c)
+for target in target_card_list:
+    print(len(card_dict.get(target, [])), end = ' ')
 
-    
+
+
 
 
