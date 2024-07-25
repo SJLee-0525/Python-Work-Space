@@ -1,69 +1,51 @@
-from sys import *
+import sys
+from collections import deque
 
-n = int(input())
+n = int(sys.stdin.readline().strip())
 
-stu_list = list(map(int, stdin.readline().split()))
+stu_list = deque(map(int, sys.stdin.readline().split()))
 
 final_list = []
-temp_list = []
+stack_list = []
 temp_n = n
+
+Bo = True
 target = 1
-
-while 1:
-    print(final_list)
-    print(temp_list)
-    if stu_list[0] == target:
-        temp = stu_list.pop(0)
-        final_list.append(temp)
+while len(stu_list) > 0:
+    if target == stu_list[0]:
+        final_list.append(stu_list.popleft())
+        print(final_list)
+        print('나감')
         target += 1
-
-    elif stu_list[0] == temp_n:
-        temp = stu_list.pop(0)
-        temp_list.append(temp)
-        temp_n -= 1
-
-    elif temp_list[-1] == target:
-        temp = temp_list.pop()
-        final_list.append(temp)
+    elif target != stu_list[0]:
+        print(stack_list)
+        print('스택으로')
+        if len(stack_list) == 0:
+            stack_list.append(stu_list.popleft())
+        elif len(stack_list) != 0:
+            if stack_list[-1] != target:
+                stack_list.append(stu_list.popleft())
+            elif stack_list[-1] == target:
+                while stack_list[-1] == target:
+                    final_list.append(stack_list.pop())
+                    print(final_list)
+                    print('스택에서 나감')
+                    target += 1
+        break
+            
+while len(stack_list) > 0:
+    if target == stack_list[-1]:
+        final_list.append(stack_list.pop())
         target += 1
-    
-if len(final_list) == n:
+    else:
+        print('Sad')
+        Bo = False
+        break
+
+print(stu_list)
+print(stack_list)
+print(final_list)
+if Bo == True:
     print('Nice')
     
     
-elif len(final_list) != n:
-    print('Sad')
-    
-
-# if target == n:
-#     print('Nice')
-#     break
-
-# elif target != n:
-#     print('Sad')
-#     break
-    
-    # print(stu_list)
-    
-    #     if len(temp_list) == 0 and len(stu_list) == 0:
-    #         print('Nice')
-        
-
-
-
-
-
-
-# while 1:
-#     if temp_list[-1] == num:
-#         temp_2 = temp_list.pop()
-#         final_list.append(temp_2)
-#         num += 1
-
-#     if len(temp_list) == 0:
-#         print('Nice')
-#         break
-
-#     else:
-#         break
-   
