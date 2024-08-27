@@ -14,26 +14,23 @@ def move(arr, N):
         for j in range(N):
             if arr[i][j]:      # 순회하다가 공이 있는 곳을 만나면
                 temp_list = arr[i][j]
-                print(temp_list)
                 for temp in temp_list:
-                    print('22222', temp)
                     ti = (i + (di[temp[2]] * temp[1])) % N # 이동한 값을 계산
                     tj = (j + (dj[temp[2]] * temp[1])) % N # temp[2] = d | temp[1] = s
                     if not new_arr[ti][tj]:     # 만약 새 맵에서 이동한 좌표가 비어있다면
-                        new_arr[ti][tj] = temp  # 추가
-                        print('aaaaaaaaaa', new_arr)
+                        new_arr[ti][tj].append(temp)  # 추가
                     else:                       # 비어있지 않다면 합치고
-                        new_arr[ti][tj][0] += temp[0]
-                        new_arr[ti][tj][1] += temp[1]
-                        new_arr[ti][tj][2] += temp[2]
-                        new_arr[ti][tj][3] += temp[3]
-                        new_arr[ti][tj][4] += temp[4]
+                        print(new_arr[ti][tj])
+                        new_arr[ti][tj][0][0] += temp[0]
+                        new_arr[ti][tj][0][1] += temp[1]
+                        new_arr[ti][tj][0][2] += temp[2]
+                        new_arr[ti][tj][0][3] += temp[3]
+                        new_arr[ti][tj][0][4] += temp[4]
                         B = False
 
     if B == False:
         new_arr = ball_split(new_arr, N)
         print(new_arr)
-        print(1)
 
     return new_arr
 
@@ -45,12 +42,10 @@ def ball_split(arr, N):
         for j in range(N):
             if arr[i][j]: # 만약 합쳐져서 값이 2 이상이라면
                 temp_l = arr[i][j]
-                # print(temp_l)
-                if temp_l[3] >= 2:
-                    temp = temp_l
+                if temp_l[0][3] >= 2:
+                    temp = temp_l[0]
                     temp[0] = temp[0] // 5 # 질량
                     if temp[0] == []: # 질량이 0이되면 소멸되어 사라짐
-                        # arr[i][j] = 0
                         break
                     temp[1] = temp[1] // temp[3] # 속력
 
@@ -64,7 +59,7 @@ def ball_split(arr, N):
                             new_arr[i][j].append([temp[0], temp[1], k2, 1, k2 % 2])
                         # for k2 in [1, 3, 5, 7]:
                             # new_arr[(i + di[k2]) % N][(j + dj[k2]) % N] = [temp[0], temp[1], k2, 1, k2 % 2]
-                    # arr[i][j] = 0
+                    arr[i][j] = []
     # print('##', arr)
     print('###', new_arr)
     return new_arr
