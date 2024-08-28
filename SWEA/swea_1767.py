@@ -1,9 +1,11 @@
+# 오류 있었움,,, 어케 맞앗냥
+
 def edge(N):
     '''엣지에 위치한 코어 처리 및 코어 위치 좌표 추가'''
-    for i in range(1, N):
-        for j in range(1, N):
+    for i in range(1, N + 1):
+        for j in range(1, N + 1):
             if maxinos[i][j] == 1: # 만약 코어가 있는데
-                if i == 1 or i == N + 1 or j == 1 or j == N + 1: # 코어가 엣지에 위치하면 이미 연결된 것이니 -1로 바꿈
+                if i == 1 or i == N or j == 1 or j == N: # 코어가 엣지에 위치하면 이미 연결된 것이니 -1로 바꿈
                     maxinos[i][j] = -1 # 이걸 맨첨에 9로 바꿔서 틀렸음. 주변부도 9로 처리했으니..
                 else:   # 만약 주변부에 위치한 코어가 아니면
                     core.append((i, j)) # 코어 리스트에 좌표 추가
@@ -63,6 +65,6 @@ for tc in range(1, T + 1):
     connect_core(0, len(core), N, maxinos, 0, 0)
 
     result.sort(reverse=True, key=lambda x: (x[0], -x[1]))
-    # 결과 리스트 정렬 (정렬 우선순위 1: x[0] - 내림차순 | 2: x[1] 오름차순)
+    # 결과 리스트 정렬 (우선 순위 1: x[0] - 내림차순 | 우선 순위 2: x[1] 오름차순)
 
     print(f'#{tc} {result[0][1]}')
