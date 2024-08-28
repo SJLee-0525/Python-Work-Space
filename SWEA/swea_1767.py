@@ -12,8 +12,17 @@ def edge(N):
 
 def connect_core(index, index_N, N, maxinos, connected_core, wire_len):
     '''코어들을 연결하는 함수'''
+    global max_connected
+
     if index == index_N: # 만약 코어 좌표 리스트를 다 탐색했으면
         result.append((connected_core, wire_len))   # 연결된 코어 개수와, 선의 길이를 결과 리스트에 추가
+        if max_connected < connected_core:
+            max_connected = connected_core
+        return
+
+    # 가지치기 추가해봄 (만약 남은 코어를 다 더해도 현재 계산된 최대 코어보다 적은 게 확실하면 리턴)
+    # 결과: 실행시간 5400ms에서 2000ms로 감소함
+    if connected_core + (index_N - index + 1) < max_connected:
         return
 
     # 해당 코어를 연결하지 않는 경우를 가정하고 재귀 호출해 다음 탐색
@@ -60,6 +69,7 @@ for tc in range(1, T + 1):
               [[9] * (N + 2)]
 
     result = [] # 코어를 연결한 개수와 선의 길이를 담을 결과 리스트
+    max_connected = 0
 
     edge(N)     # 엣지에 있는 코어 처리 및 코어 좌표 추가 함수 호출
     connect_core(0, len(core), N, maxinos, 0, 0)
