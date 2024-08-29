@@ -11,14 +11,7 @@ def move(input_D):
             Q //= 2 # 미생물의 수는 2로 나는 몫으로 줄임
             if Q == 0: # 만약 미생물 수가 0이 되면 건너뜀
                 continue
-            if dir == 1: # + 방향을 반대로 바꿔줌
-                dir = 2
-            elif dir == 2:
-                dir = 1
-            elif dir == 3:
-                dir = 4
-            elif dir == 4:
-                dir = 3
+            dir = reverse_dir[dir] # 방향을 반대로 바꿔줌
 
         if (mi, mj) not in new_D:       # 만약 새 딕셔너리에 이동한 좌표를 가진 key가 없다면
             new_D[(mi, mj)] = [Q, dir]  # 미생물 정보 추가
@@ -48,6 +41,7 @@ for tc in range(1, T + 1):
     # 1: 상, 2: 하, 3: 좌, 4: 우 (연산 편하게 하려고 0 앞에 추가함)
     di = [0, -1, 1, 0, 0]
     dj = [0, 0, 0, -1, 1]
+    reverse_dir = [0, 2, 1, 4, 3] # 방향 뒤집을 때 쓸 리스트
 
     D = {} # 좌표, 미생물 세부 정보 담을 딕셔너리
 
