@@ -28,9 +28,8 @@ class LinkedList:
             self.head = newNode
             return
         node = self.get_node(index - 1)
-        nextNode = node.next
+        newNode.next = node.next
         node.next = newNode
-        newNode.next = nextNode
 
     def delete_node(self, index):
         if index == 0:
