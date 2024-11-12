@@ -1,9 +1,14 @@
+'''
+모든 입력 작업이 선행 작업이 없을 경우를 고려 못해서 틀린듯
+'''
 import sys, heapq
 
 def findStarts():
     for work in range(1, N + 1):
         if not needWorks[work]:
             starts.append(work)
+            results[work] = needTimes[work]
+            # 선행 작업이 전부 없을 것을 고려해 시작과 동시에 결과 할당하고 시작
 
 def dijkstra():
     complete = 0
@@ -22,12 +27,9 @@ def dijkstra():
                 if needWorks[adjWork] > 0:
                     continue
 
-            complete += 1
             nextTime = currTime + needTimes[adjWork]
             if needWorks[adjWork] == 0 and results[adjWork] <= nextTime:
                 results[adjWork] = nextTime
-                if complete == N:
-                    return results
                 heapq.heappush(priorityQueue, (nextTime, adjWork))
 
     return max(results)
@@ -46,12 +48,10 @@ for workNum in range(1, N + 1):
         adjWorks[args[w]].append(workNum)
         needWorks[workNum] += 1
 
-# print(needTimes)
-# print(needWorks)
-# print(adjWorks)
-
 starts = []
-findStarts()
-
 results = [0] * (N + 1)
+
+findStarts()
 print(dijkstra())
+
+
